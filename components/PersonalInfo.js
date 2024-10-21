@@ -3,7 +3,7 @@ import DatePicker from '../components/DatePicker.js';
 import {useState} from 'react';
 
 
-export default function PersonalInfo({screenstyle}) {
+export default function PersonalInfo({screenstyle, data, setData}) {
 
   const [dob, setDob] = useState(new Date("2000-01-01"));
  
@@ -21,7 +21,7 @@ export default function PersonalInfo({screenstyle}) {
       <TextInput style={styles.textbox} placeholder="Enter your first name"/>
       <Text style={styles.label}>Lastname</Text>
       <TextInput style={styles.textbox} placeholder="Enter your last name"/>  
-      <DatePicker thisDate={dob} setThisdate={setDob} datelabel="Date of Birth" />
+      
     </View>
   );
 }

@@ -5,7 +5,11 @@ import DatePicker from '../components/DatePicker';
 
 import {useState} from 'react';
 
-export default function MovieBooking({screenstyle}) {
+
+
+export default function MovieBooking({screenstyle, data, setData}) {
+
+
   const [movieChoice, setMovieChoice] = useState("");
   const [totalTickets, setTotaltickets] = useState(1);
   const [balcony, setBalcony] = useState(false);
@@ -15,17 +19,27 @@ export default function MovieBooking({screenstyle}) {
    {'id' : 2, "title": "Joker, Folie a Deux", "age": 18}, 
    {'id': 3, "title": "Deadpool and Wolverine", "age": 12}
   ]);
+
+      function handleChangeMovieTitle(newTitle) {
+        setData(data => ({
+          ...data, // use the spread operator to 'spread' the previous booking properties
+          movieTitle: newTitle // update only the movieTitle
+        }));
+   }
+
+
+
   return (
     <View style={screenstyle}>    
       <Text style={styles.label}>Choose Movie</Text>
       <Picker style={styles.textbox}
-        selectedValue={movieChoice}
-        onValueChange={(itemValue) => setMovieChoice(itemValue)}>
+        selectedValue={data.movieTitle}
+        onValueChange={(itemValue) => handleChangeMovieTitle(itemValue)}>
         { movieList.map((movie) => {
           return <Picker.Item label={movie.title} value={movie.title}/>
           })}
       </Picker>
-      <DatePicker thisDate={movieDate} setThisdate={setMoviedate} datelabel="Showing Date" />
+     
       <Text style={styles.label}>Number of Tickets: {totalTickets}</Text>
       
       <Slider 
